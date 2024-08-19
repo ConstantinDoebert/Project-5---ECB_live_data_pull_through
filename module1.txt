@@ -1,0 +1,16 @@
+Sub GetECBData()
+    ' Ensure that xlwings is installed and properly set up
+    Dim xlApp As Object
+    On Error Resume Next
+    Set xlApp = CreateObject("xlwings.Application")
+    On Error GoTo 0
+
+    If xlApp Is Nothing Then
+        MsgBox "Please install xlwings and ensure it's set up correctly."
+        Exit Sub
+    End If
+
+    ' Execute the Python function
+    xlApp.Visible = True
+    ThisWorkbook.Application.RunPython ("import sys; sys.path.append('" & ThisWorkbook.Path & "'); from your_script_name import write_data_to_excel; write_data_to_excel()")
+End Sub
